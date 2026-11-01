@@ -32,3 +32,13 @@ GitHub's currently documented maximum general-purpose x64 Windows Larger Runner 
 - `.github/workflows/hardware-inspector.yml` — workflow definition.
 - `scripts/Check-Hardware.ps1` — hardware report generator.
 - `tests/Test-Hardware.ps1` — report validation.
+
+
+## Short benchmark
+
+Each workflow run also performs a bounded synthetic benchmark:
+- CPU: SHA-256 operations over a short fixed time window, using the runner's logical processor count.
+- Disk: sequential write/read of a temporary 32 MB file.
+- Results are uploaded with the hardware report as `benchmark/benchmark.json` and `benchmark/benchmark.md`.
+
+The benchmark is intended for comparing runs on similar runner types. Storage caching and shared runner load can affect results. It does not measure GPU performance, gaming FPS, display refresh rate, or RDP responsiveness.
