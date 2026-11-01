@@ -45,15 +45,22 @@ jobs:
         run: |
           ./scripts/Check-Hardware.ps1 -OutputDirectory reports
 
+      - name: Run short CPU and disk benchmark
+        shell: pwsh
+        run: |
+          ./scripts/Run-Benchmark.ps1 -OutputDirectory benchmark
+
       - name: Validate hardware report
         shell: pwsh
         run: |
           ./tests/Test-Hardware.ps1
 
-      - name: Upload hardware report
+      - name: Upload hardware and benchmark reports
         uses: actions/upload-artifact@v4
         with:
           name: hardware-report
-          path: reports/
+          path: |
+            reports/
+            benchmark/
           if-no-files-found: error
           retention-days: 7
