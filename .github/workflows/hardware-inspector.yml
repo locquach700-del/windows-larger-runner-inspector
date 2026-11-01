@@ -10,15 +10,6 @@ on:
       - "tests/**"
       - "README.md"
   workflow_dispatch:
-    inputs:
-      runner_label:
-        description: "Use the exact label of a Windows Larger Runner, or keep the standard runner"
-        required: true
-        type: choice
-        default: windows-2022
-        options:
-          - windows-2022
-          - windows-2022-96core
 
 permissions:
   contents: read
@@ -26,7 +17,7 @@ permissions:
 jobs:
   inspect:
     name: Inspect Windows hardware
-    runs-on: ${{ inputs.runner_label || 'windows-2022' }}
+    runs-on: windows-2022
     timeout-minutes: 20
 
     steps:
